@@ -1,21 +1,19 @@
 package com.tennik.akkatcp.handlers
 
 import akka.actor.Actor
-import akka.event.{Logging, LoggingAdapter}
+import akka.event.{ Logging, LoggingAdapter }
 import akka.io.Tcp
-import akka.io.Tcp.{Received, Write}
+import akka.io.Tcp.{ Received, Write }
 import akka.util.ByteString
-import com.tennik.akkatcp.dao.UserDAO
+import com.tennik.akkatcp.dao.UserDao
 import com.tennik.akkatcp.models.User
 import com.tennik.akkatcp.protobuf.test._
 import org.mindrot.jbcrypt._
 
-class LoginHandler extends Actor {
+class LoginHandler(userDAO: UserDao) extends Actor {
   val log: LoggingAdapter = Logging.getLogger(context.system, this)
 
   private val cnt = collection.mutable.Map[String, Int]().withDefaultValue(0)
-
-  private val userDAO = new UserDAO
 
   def receive: Receive = {
     case Received(data) =>

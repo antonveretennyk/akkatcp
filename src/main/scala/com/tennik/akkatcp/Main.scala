@@ -1,7 +1,6 @@
 package com.tennik.akkatcp
 
-import akka.actor.{ ActorRef, ActorSystem, Props }
-import com.tennik.akkatcp.dao.UserDAO
+import akka.actor.{ ActorSystem, Props }
 import com.tennik.akkatcp.servers.LoginServer
 
 object Main extends App {

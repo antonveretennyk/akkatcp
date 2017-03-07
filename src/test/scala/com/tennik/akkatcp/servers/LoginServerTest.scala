@@ -2,9 +2,9 @@ package com.tennik.akkatcp.servers
 
 import java.net.InetSocketAddress
 
-import akka.actor.{ActorRef, ActorSystem}
-import akka.testkit.{ImplicitSender, TestActorRef, TestKit, TestProbe}
-import org.scalatest.{BeforeAndAfterAll, Matchers, WordSpecLike}
+import akka.actor.{ ActorRef, ActorSystem }
+import akka.testkit.{ ImplicitSender, TestActorRef, TestKit, TestProbe }
+import org.scalatest.{ BeforeAndAfterAll, Matchers, WordSpecLike }
 
 class LoginServerTest() extends TestKit(ActorSystem("LoginServer")) with ImplicitSender
     with WordSpecLike with Matchers with BeforeAndAfterAll {
