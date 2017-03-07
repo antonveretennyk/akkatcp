@@ -12,6 +12,10 @@ import scala.concurrent.duration._
 class LoginHandlerTest() extends TestKit(ActorSystem("LoginHandlerSystem"))
     with ImplicitSender with WordSpecLike with Matchers with BeforeAndAfterAll {
 
+  trait Context {
+    val sut = TestActorRef(Props(new LoginHandler(userDAO = userDao)), "Hndlr")
+  }
+
   import akka.io.Tcp._
 
   val counter = 1
@@ -29,14 +33,10 @@ class LoginHandlerTest() extends TestKit(ActorSystem("LoginHandlerSystem"))
 
   "LoginHandler" must {
 
-    "response with counter == 1 if receive Received message with \"admin\" user" in {
-
-      val sut = TestActorRef(Props(new LoginHandler(userDAO = userDao)), "Hndlr")
-
+    "response with counter == 1 if receive Received message with \"admin\" user" in new Context {
       sut ! Received(adminAuthRequest)
 
       expectMsg(Write(payload(1)))
-
     }
 
     "respose with counter == 2 for 2 received messages" in {
