@@ -1,0 +1,20 @@
+syntax = "proto2";
+
+package com.tennik.akkatcp.protobuf;
+
+option java_package = "com.tennik.akkatcp.protobuf";
+option java_outer_classname = "auth";
+
+enum ERROR_CODE {
+    OK = 0;
+    ERROR = 1;
+}
+message AutorizationRequest{
+    required string username = 1;
+    required string pwd = 2;
+}
+
+message AutorizationResponse {
+    required ERROR_CODE status = 1;
+    optional int32 authRequestNumber = 2;
+}
