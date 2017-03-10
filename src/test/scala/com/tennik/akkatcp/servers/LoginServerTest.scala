@@ -26,12 +26,12 @@ class LoginServerTest() extends TestKit(ActorSystem("LoginServer")) with Implici
 
   "LoginServer" must {
     "send a message Bind to the Tcp Manager at start" in {
-      tcpManager.expectMsg(Bind(sutRef, local))
+      tcpManager.expectMsg(Bind(sutRef, local, pullMode = true))
     }
 
     "send registered message on Connected" in {
       sutRef ! Connected(remote, local)
-      expectMsg(Register(handlerProbe.ref))
+      expectMsg(Register(handlerProbe.ref, keepOpenOnPeerClosed = true))
     }
   }
 
